@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0f1020;
+    font-family: Arial;
+}
+
+.contenedor {
+    text-align: center;
+}
+
+.cara {
+    font-size: 100px;
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 10px;
+    width: 200px;
+}
+
+button {
+    padding: 10px;
+}
