@@ -2,7 +2,7 @@ import json
 import random
 import threading
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 
 app_web = Flask(__name__)
@@ -54,7 +54,7 @@ if "estado_ia" not in memoria:
 
 @app_web.route("/")
 def inicio():
-    return "¡Hola! Soy Heraclio"
+    return send_from_directory("mi-ia", "index.html")
 
 def enviar():
 
