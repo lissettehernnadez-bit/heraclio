@@ -52,6 +52,10 @@ if "estado_ia" not in memoria:
 #entrada = ctk.CTkEntry(app, placeholder_text="Escribe aquí...")
 #entrada.pack(pady=10)
 
+@app_web.route("/")
+def inicio():
+    return "¡Hola! Soy Heraclio"
+
 def enviar():
 
     mensaje = entrada.get().lower()
