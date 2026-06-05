@@ -1,1 +1,1 @@
-web: gunicorn "heraclio web:app_web"
+web: gunicorn heraclio_web:app_web

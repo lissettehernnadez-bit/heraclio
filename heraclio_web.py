@@ -1,7 +1,5 @@
-import customtkinter as ctk
 import json
 import random
-import win32com.client
 import threading
 
 from flask import Flask, request, jsonify
@@ -10,10 +8,12 @@ from flask_cors import CORS
 app_web = Flask(__name__)
 CORS(app_web)
 
-speaker = win32com.client.Dispatch("SAPI.SpVoice")
+#speaker = win32com.client.Dispatch("SAPI.SpVoice")
 
-def hablar(texto):
-    speaker.Speak(texto)
+
+
+#def hablar(texto):
+#speaker.Speak(texto)
 
     
 print("holis")
@@ -40,17 +40,17 @@ if "estado_ia" not in memoria:
     memoria["estado_ia"] = "normal"
 
 # VENTANA
-ctk.set_appearance_mode("dark")
+#ctk.set_appearance_mode("dark")
 
-app = ctk.CTk()
-app.geometry("450x500")
-app.title("Mi IA 💙")
+#app = ctk.CTk()
+#app.geometry("450x500")
+#app.title("Mi IA 💙")
 
-chat = ctk.CTkTextbox(app, width=400, height=300)
-chat.pack(pady=20)
+#chat = ctk.CTkTextbox(app, width=400, height=300)
+#chat.pack(pady=20)
 
-entrada = ctk.CTkEntry(app, placeholder_text="Escribe aquí...")
-entrada.pack(pady=10)
+#entrada = ctk.CTkEntry(app, placeholder_text="Escribe aquí...")
+#entrada.pack(pady=10)
 
 def enviar():
 
@@ -222,8 +222,8 @@ def enviar():
     mensaje = entrada.get().lower()
     respuesta = ""
    
-boton = ctk.CTkButton(app, text="Enviar", command=enviar)
-boton.pack(pady=10)
+#boton = ctk.CTkButton(app, text="Enviar", command=enviar)
+#boton.pack(pady=10)
 
 @app_web.route("/hablar", methods=["POST"])
 def hablar_web():
@@ -411,5 +411,5 @@ def iniciar_flask():
 
 threading.Thread(target=iniciar_flask, daemon=True).start()
 
-app.mainloop()
+#app.mainloop()
 
