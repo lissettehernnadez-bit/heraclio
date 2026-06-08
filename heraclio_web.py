@@ -310,7 +310,6 @@ def hablar_web():
                 "excelente, ahora que has venido"
                 ]
             emocion = "feliz"
-            respuesta = random.choice(respuestas)
 
         elif memoria["estado_ia"] == "triste":
             respuestas = [
@@ -321,7 +320,6 @@ def hablar_web():
                 "la existencia es sufrimiento"
             ]
             emocion = "triste"
-            respuesta = random.choice(respuestas)
 
         elif memoria["estado_ia"] == "cansado":
             respuestas = [
@@ -331,7 +329,6 @@ def hablar_web():
                 "podria estar mejor"
             ]
             emocion = "triste"
-            respuesta = random.choice(respuestas)
 
         elif memoria["estado_ia"] == "enoj":
             respuestas = [
@@ -341,7 +338,6 @@ def hablar_web():
                 "!todo me produce violencia!"
             ]
             emocion = "enoj"
-            respuesta = random.choice(respuestas)
 
         else: #normal
             respuestas = [
@@ -350,7 +346,7 @@ def hablar_web():
                 "todo en orden"
             ]
             emocion = "normal"
-            respuesta = random.choice(respuestas)
+        respuesta = random.choice(respuestas)
         
     elif "como me llamo" in mensaje:
 
