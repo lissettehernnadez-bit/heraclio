@@ -52,9 +52,12 @@ if "estado_ia" not in memoria:
 #entrada = ctk.CTkEntry(app, placeholder_text="Escribe aquí...")
 #entrada.pack(pady=10)
 
-@app_web.route("/")
 def inicio():
     return send_from_directory("mi-ia", "index.html")
+
+@app_web.route('/<path:archivo>')
+def servir_archivo(archivo):
+    return send_from_directory('mi-ia', archivo)
 
 def enviar():
 
