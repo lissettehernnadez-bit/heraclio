@@ -52,9 +52,6 @@ if "estado_ia" not in memoria:
 #entrada = ctk.CTkEntry(app, placeholder_text="Escribe aquí...")
 #entrada.pack(pady=10)
 
-def inicio():
-    return send_from_directory("mi-ia", "index.html")
-
 @app_web.route("/")
 def inicio():
     return send_from_directory("mi-ia", "index.html")
@@ -299,7 +296,7 @@ def hablar_web():
         respuesta = nombre_ia
         emocion = "feliz"
 
-    elif "y ese nombre" in mensaje or "que raro nombre" in mensaje:
+    elif "y ese nombre" in mensaje or "que raro nombre" in mensaje or "que feo nombre" in mensaje:
         respuesta = "a mi creadora le hace reir"
         emocion = "triste"
 
@@ -313,6 +310,7 @@ def hablar_web():
                 "excelente, ahora que has venido"
                 ]
             emocion = "feliz"
+            respuesta = random.choice(respuestas)
 
         elif memoria["estado_ia"] == "triste":
             respuestas = [
@@ -323,6 +321,7 @@ def hablar_web():
                 "la existencia es sufrimiento"
             ]
             emocion = "triste"
+            respuesta = random.choice(respuestas)
 
         elif memoria["estado_ia"] == "cansado":
             respuestas = [
@@ -332,6 +331,7 @@ def hablar_web():
                 "podria estar mejor"
             ]
             emocion = "triste"
+            respuesta = random.choice(respuestas)
 
         elif memoria["estado_ia"] == "enoj":
             respuestas = [
@@ -341,6 +341,7 @@ def hablar_web():
                 "!todo me produce violencia!"
             ]
             emocion = "enoj"
+            respuesta = random.choice(respuestas)
 
         else: #normal
             respuestas = [
@@ -349,7 +350,7 @@ def hablar_web():
                 "todo en orden"
             ]
             emocion = "normal"
-        respuesta = random.choice(respuestas)
+            respuesta = random.choice(respuestas)
         
     elif "como me llamo" in mensaje:
 
@@ -392,7 +393,7 @@ def hablar_web():
             "ya pero oye, calmate. respira.",
             "es un buen momento para recordarte que la violencia nunca es buena, mata el alma y la envenena"
         ]
-        emocion = "enoj"
+        emocion = "triste"
         respuesta = random.choice(respuestas)
 
     elif "cansad" in mensaje:
