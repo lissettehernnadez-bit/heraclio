@@ -4,24 +4,42 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #0f1020;
-    font-family: Arial;
+
+    background: linear-gradient(
+        180deg,
+        #6ec6ff,
+        #b3e5fc
+    );
+
+    font-family: Arial, sans-serif;
 }
 
 .contenedor {
     text-align: center;
 }
 
-.cara {
-    font-size: 100px;
+#cara {
+    width: 400px;
     margin-bottom: 20px;
 }
 
 input {
-    padding: 10px;
-    width: 200px;
+    padding: 12px;
+    width: 300px;
+    font-size: 18px;
+    border-radius: 15px;
+    border: none;
 }
 
 button {
-    padding: 10px;
+    padding: 12px;
+    font-size: 18px;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+#respuesta {
+    color: #222;
+    font-size: 22px;
 }
