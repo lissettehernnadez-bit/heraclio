@@ -12,7 +12,7 @@ import uuid
 app_web = Flask(__name__)
 CORS(app_web)
 
-VOZ = "es-ES-AlvaroNeural"
+VOZ = "es-ES-DarioNeural"
 
 #speaker = win32com.client.Dispatch("SAPI.SpVoice")
 
