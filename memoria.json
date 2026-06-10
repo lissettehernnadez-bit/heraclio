@@ -1,0 +1,10 @@
+{
+    "estado": "amigable",
+    "estado_ia": "triste",
+    "nombre_usuario": "liss",
+    "veces_llamado": 13,
+    "historial": [],
+    "emocion_historial": [],
+    "conocimientos": {},
+    "aprendiendo": null
+}

@@ -293,24 +293,77 @@ def hablar_web():
         memoria["estado_ia"] = random.choice(emociones_ia)
 
     print("Estado de Heraclio:", memoria["estado_ia"])
+    
 
     palabras_basicas = [
-        "el",
-        "la",
-        "los",
-        "las",
-        "un",
-        "una",
-        "de",
-        "que",
-        "y",
-        "o",
-        "es",
-        "son",
-        "tengo",
-        "hay",
-        "cómo"
-    ]
+
+    # Artículos
+    "el", "la", "los", "las",
+    "un", "una", "unos", "unas",
+
+    # Preposiciones
+    "de", "del", "a", "en",
+    "con", "sin", "por", "para",
+
+    # Conectores
+    "y", "e", "o", "u",
+    "pero", "aunque", "porque",
+
+    # Pronombres
+    "yo", "tu", "tú",
+    "mi", "mí",
+    "me", "te",
+    "nos", "vosotros",
+    "él", "ella",
+    "ellos", "ellas",
+
+    # Demostrativos
+    "este", "esta",
+    "ese", "esa",
+    "esto", "eso",
+
+    # Interrogativos
+    "qué",
+    "como", "cómo",
+    "quien", "quién",
+    "donde", "dónde",
+    "cuando", "cuándo",
+    "porqué", "por qué",
+
+    # Verbos básicos
+    "es", "son",
+    "soy", "eres",
+    "somos",
+
+    "estoy", "estas",
+    "estás", "esta",
+    "está",
+
+    "tengo", "tienes",
+    "tiene", "tenemos",
+
+    "hay",
+
+    "ser",
+    "estar",
+    "tener",
+
+    # Palabras muy frecuentes
+    "si",
+    "sí",
+    "no",
+
+    "bien",
+    "mal",
+
+    "hola",
+    "holas",
+    "adios",
+    "adiós",
+
+    "gracias",
+    "favor"
+]
     palabras = mensaje.split()
 
     for palabra in palabras:
