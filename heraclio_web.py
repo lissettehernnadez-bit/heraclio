@@ -412,7 +412,7 @@ def hablar_web():
         respuesta = "a mi creadora le hace reír"
         emocion = "triste"
 
-    elif "cómo estas" in mensaje:
+    elif "cómo estás" in mensaje:
 
         if memoria["estado_ia"] == "feliz":
             respuestas = [
