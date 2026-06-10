@@ -292,7 +292,22 @@ def hablar_web():
 
     print("Estado de Heraclio:", memoria["estado_ia"])
 
-
+    palabras_basicas = [
+        "el",
+        "la",
+        "los",
+        "las",
+        "un",
+        "una",
+        "de",
+        "que",
+        "y",
+        "o",
+        "es",
+        "son",
+        "tengo",
+        "hay"
+    ]
     palabras = mensaje.split()
 
     for palabra in palabras:
