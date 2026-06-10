@@ -12,7 +12,7 @@ import uuid
 app_web = Flask(__name__)
 CORS(app_web)
 
-VOZ = "es-ES-AlvaroNeural"
+VOZ = "es-ES-ArnauNeural"
 
 #speaker = win32com.client.Dispatch("SAPI.SpVoice")
 
@@ -495,7 +495,7 @@ def hablar_web():
         
     elif "feliz" in mensaje or "alegre" in mensaje:
         respuestas = [
-            "la volá pulenta, que bakan.",
+            "la volá pulenta, que bakán.",
             "Qué lindo! ta bien.",
             "wena gila conche... no, no debo decir malas palabras"
         ]
