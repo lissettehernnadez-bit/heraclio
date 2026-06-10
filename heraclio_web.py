@@ -2,11 +2,17 @@ import json
 import random
 import threading
 
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify, send_from_directory, send_file
 from flask_cors import CORS
+
+import asyncio
+import edge_tts
+import uuid
 
 app_web = Flask(__name__)
 CORS(app_web)
+
+VOZ = "es-ES-AlvaroNeural"
 
 #speaker = win32com.client.Dispatch("SAPI.SpVoice")
 
@@ -524,6 +530,30 @@ def hablar_web():
         "emocion": emocion
     })
 
+@app_web.route("/hablar", methods=["POST"])
+def hablar():
+    texto = request.json["texto"]
+
+    archivo = f"voz_{uuid.uuid4().hex}.mp3"
+
+    asyncio.run(crear_audio(texto, archivo))
+
+    return send_file(archivo, mimetype="audio/mpeg", as_attachment=False)
+
+
+async def crear_audio(texto, archivo):
+    comunicacion = edge_tts.Communicate(texto, VOZ)
+    await comunicacion.save(archivo)
+
+@app_web.route("/voz", methods=["POST"])
+def voz():
+    texto = request.json["texto"]
+
+    archivo = f"voz_{uuid.uuid4().hex}.mp3"
+
+    asyncio.run(crear_audio(texto, archivo))
+
+    return send_file(archivo, mimetype="audio/mpeg")
 
 def iniciar_flask():
     app_web.run(port=5000, debug=False, use_reloader=False)

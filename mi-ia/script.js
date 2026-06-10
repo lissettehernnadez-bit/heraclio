@@ -23,4 +23,20 @@ async function hablar() {
     document.getElementById("respuesta").innerText = data.respuesta;
 
     document.getElementById("entrada").value = "";
+
+    let audioRes = await fetch("/voz", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        texto: data.respuesta
+    })
+});
+
+let audioBlob = await audioRes.blob();
+let url = URL.createObjectURL(audioBlob);
+
+let sonido = new Audio(url);
+sonido.play();
 }
