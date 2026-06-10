@@ -10,8 +10,6 @@ CORS(app_web)
 
 #speaker = win32com.client.Dispatch("SAPI.SpVoice")
 
-
-
 #def hablar(texto):
 #speaker.Speak(texto)
 
@@ -38,6 +36,12 @@ if "historial" not in memoria:
 
 if "estado_ia" not in memoria:
     memoria["estado_ia"] = "normal"
+
+if "conocimientos" not in memoria:
+    memoria["conocimientos"] = {}
+
+if "aprendiendo" not in memoria:
+    memoria["aprendiendo"] = None
 
 # VENTANA
 #ctk.set_appearance_mode("dark")
@@ -223,7 +227,7 @@ def enviar():
         hablar(respuesta)
 
     with open("memoria.json", "w") as f:
-            json.dump(memoria, f)
+        json.dump(memoria, f)
 
     print("BOTON FUNCIONA")
 
@@ -237,6 +241,22 @@ def enviar():
 def hablar_web():
 
     mensaje = request.json["texto"].lower()
+
+    if memoria["aprendiendo"] is not None:
+
+        palabra = memoria["aprendiendo"]
+
+        memoria["conocimientos"][palabra] = mensaje
+
+        memoria["aprendiendo"] = None
+
+        with open("memoria.json", "w") as f:
+            json.dump(memoria, f)
+
+        return jsonify({
+            "respuesta": f"Gracias. Ahora sé qué es {palabra}.",
+            "emocion": "feliz"
+        })
 
     respuesta = ""
     emocion = "normal"
@@ -271,6 +291,27 @@ def hablar_web():
         memoria["estado_ia"] = random.choice(emociones_ia)
 
     print("Estado de Heraclio:", memoria["estado_ia"])
+
+
+    palabras = mensaje.split()
+
+    for palabra in palabras:
+
+        if palabra in palabras_basicas:
+            continue
+
+        if palabra not in memoria["conocimientos"]:
+
+            memoria["aprendiendo"] = palabra
+
+            with open("memoria.json", "w") as f:
+                json.dump(memoria, f)
+
+            return jsonify({
+                "respuesta": f"¿Qué es {palabra}?",
+                "emocion": "curioso"
+            })
+
 
     # SALUDO
     if "hola" in mensaje or "holis" in mensaje:
