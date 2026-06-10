@@ -76,7 +76,8 @@ def enviar():
     "normal",
     "cansado",
     "triste",
-    "enoj"
+    "enoj",
+    "confuso"
 ]
 
     if random.randint(1, 10) == 1:
@@ -97,19 +98,19 @@ def enviar():
             "¿Qué necesitas?",
             "Presente 😎",
             "¿au?",
-            "asi me llamo",
+            "así me llamo",
             "¿qué querí?"
         ]
 
         respuesta = random.choice(respuestas)
 
-    elif "como te llamas" in mensaje:
+    elif "cómo te llamas" in mensaje:
         respuesta = nombre_ia
 
     elif "y ese nombre" in mensaje or "que raro nombre" in mensaje:
-        respuesta = "a mi creadora le hace reir"
+        respuesta = "a mi creadora le hace reír"
 
-    elif "como estas" in mensaje:
+    elif "cómo estás" in mensaje:
 
         if memoria["estado_ia"] == "feliz":
             respuestas = [
@@ -124,7 +125,7 @@ def enviar():
                 "he tenido días mejores",
                 "un poco bajoneado",
                 "más o menos",
-                "te habia extrañado",
+                "te había extrañado",
                 "la existencia es sufrimiento"
             ]
 
@@ -133,15 +134,15 @@ def enviar():
                 "sobreviviendo a mi existencia digital",
                 "necesito vacaciones digitales",
                 "funcionando por pura voluntad",
-                "podria estar mejor"
+                "podría estar mejor"
             ]
             
         elif memoria["estado_ia"] == "enoj":
             respuestas = [
                 "¡tengo rabia!",
                 "golpearia a alguien, si tan solo tuviera manos",
-                "siento la extraña necedidad de prducir violencia",
-                "!todo me produce violencia!"
+                "siento la extraña necedidad de producir violencia",
+                "¡todo me produce violencia!"
             ]
 
         else: #normal
@@ -153,7 +154,7 @@ def enviar():
 
         respuesta = random.choice(respuestas)
 
-    elif "como me llamo" in mensaje:
+    elif "cómo me llamo" in mensaje:
 
         if "nombre_usuario" in memoria:
             respuesta = f"Te llamas {memoria['nombre_usuario']}."
@@ -171,8 +172,8 @@ def enviar():
     # EMOCIONES (TUS FRASES)
     elif "triste" in mensaje:
         respuestas = [
-            "cosita, mi vida, nanai ¿qué pasho?.",
-            "pobre cosita fea ¿qué pasho?"
+            "cosita, mi vida, nanai ¿qué pashó?.",
+            "pobre cosita fea ¿qué pashó?"
         ]
         respuesta = random.choice(respuestas)
         
@@ -187,7 +188,7 @@ def enviar():
 
     elif "enoj" in mensaje:
         respuestas = [
-            "ya pero oye, calmate. respira.",
+            "ya pero oye, cálmate. respira.",
             "es un buen momento para recordarte que la violencia nunca es buena, mata el alma y la envenena"
         ]
         respuesta = random.choice(respuestas)
@@ -200,7 +201,7 @@ def enviar():
         respuesta = random.choice(respuestas)
 
     else:
-        respuesta = "ya pero ¿y que me importa a mi? na, bromita. cuenta nomas"
+        respuesta = "ya pero ¿y qué me importa a mi? na, bromita. cuenta nomas"
 
 
     # ESTADO
@@ -268,7 +269,8 @@ def hablar_web():
     "normal",
     "cansado",
     "triste",
-    "enoj"
+    "enoj",
+    "confuso"
 ]
 
     estado_actual = memoria.get("estado_ia", "normal")
@@ -306,7 +308,8 @@ def hablar_web():
         "es",
         "son",
         "tengo",
-        "hay"
+        "hay",
+        "cómo"
     ]
     palabras = mensaje.split()
 
@@ -324,7 +327,7 @@ def hablar_web():
 
             return jsonify({
                 "respuesta": f"¿Qué es {palabra}?",
-                "emocion": "curioso"
+                "emocion": "confuso"
             })
 
 
@@ -341,22 +344,22 @@ def hablar_web():
             "¿Qué necesitas?",
             "Presente 😎",
             "¿au?",
-            "asi me llamo",
+            "así me llamo",
             "¿qué querí?"
         ]
 
         respuesta = random.choice(respuestas)
         emocion = "feliz"
 
-    elif "como te llamas" in mensaje:
+    elif "cómo te llamas" in mensaje:
         respuesta = nombre_ia
         emocion = "feliz"
 
     elif "y ese nombre" in mensaje or "que raro nombre" in mensaje or "que feo nombre" in mensaje:
-        respuesta = "a mi creadora le hace reir"
+        respuesta = "a mi creadora le hace reír"
         emocion = "triste"
 
-    elif "como estas" in mensaje:
+    elif "cómo estas" in mensaje:
 
         if memoria["estado_ia"] == "feliz":
             respuestas = [
@@ -372,7 +375,7 @@ def hablar_web():
                 "he tenido días mejores",
                 "un poco bajoneado",
                 "más o menos",
-                "te habia extrañado",
+                "te había extrañado",
                 "la existencia es sufrimiento"
             ]
             emocion = "triste"
@@ -390,7 +393,7 @@ def hablar_web():
             respuestas = [
                 "¡tengo rabia!",
                 "golpearia a alguien, si tan solo tuviera manos",
-                "siento la extraña necedidad de prducir violencia",
+                "siento la extraña necedidad de producir violencia",
                 "!todo me produce violencia!"
             ]
             emocion = "enoj"
@@ -404,7 +407,7 @@ def hablar_web():
             emocion = "normal"
         respuesta = random.choice(respuestas)
         
-    elif "como me llamo" in mensaje:
+    elif "cómo me llamo" in mensaje:
 
         if "nombre_usuario" in memoria:
             respuesta = f"Te llamas {memoria['nombre_usuario']}."
@@ -425,8 +428,8 @@ def hablar_web():
 
     elif "triste" in mensaje:
         respuestas = [
-            "cosita, mi vida, nanai ¿qué pasho?.",
-            "pobre cosita fea ¿qué pasho?"
+            "cosita, mi vida, nanai ¿qué pashó?",
+            "pobre cosita fea ¿qué pashó?"
         ]
         emocion = "triste"
         respuesta = random.choice(respuestas)
@@ -442,7 +445,7 @@ def hablar_web():
 
     elif "enoj" in mensaje:
         respuestas = [
-            "ya pero oye, calmate. respira.",
+            "ya pero oye, cálmate. respira.",
             "es un buen momento para recordarte que la violencia nunca es buena, mata el alma y la envenena"
         ]
         emocion = "triste"
@@ -457,7 +460,7 @@ def hablar_web():
         respuesta = random.choice(respuestas)
 
     else:
-        respuesta = "ya pero ¿y que me importa a mi? na, bromita. cuenta nomas"
+        respuesta = "ya pero ¿y qué me importa a mí? na, bromita. cuenta nomas"
         emocion = "normal"
         
 
