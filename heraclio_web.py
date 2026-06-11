@@ -12,7 +12,7 @@ import uuid
 app_web = Flask(__name__)
 CORS(app_web)
 
-VOZ = "es-MX-CarlosNeural"
+VOZ = "es-ES-AlvaroNeural"
 
 #speaker = win32com.client.Dispatch("SAPI.SpVoice")
 
@@ -544,6 +544,12 @@ def hablar():
 async def crear_audio(texto, archivo):
     comunicacion = edge_tts.Communicate(texto, VOZ)
     await comunicacion.save(archivo)
+
+    comunicacion = edge_tts.Communicate(
+    texto,
+    VOZ,
+    rate="-10%"
+)
 
 @app_web.route("/voz", methods=["POST"])
 def voz():
