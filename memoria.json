@@ -1,8 +1,7 @@
 {
     "estado": "amigable",
-    "estado_ia": "triste",
+    "estado_ia": "normal",
     "nombre_usuario": "liss",
-    "veces_llamado": 13,
     "historial": [],
     "emocion_historial": [],
     "conocimientos": {},
