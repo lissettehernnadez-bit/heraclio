@@ -248,12 +248,15 @@ def enviar():
 def hablar_web():
 
     mensaje = request.json["texto"].lower()
-
+        
     if memoria["aprendiendo"] is not None:
 
         palabra = memoria["aprendiendo"]
 
         memoria["conocimientos"][palabra] = mensaje
+
+        print("APRENDIÓ:")
+        print(memoria["conocimientos"])
 
         memoria["aprendiendo"] = None
 
