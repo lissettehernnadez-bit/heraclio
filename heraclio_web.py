@@ -548,7 +548,7 @@ async def crear_audio(texto, archivo):
     comunicacion = edge_tts.Communicate(
     texto,
     VOZ,
-    rate="-10%"
+    rate="+10%"
 )
 
 @app_web.route("/voz", methods=["POST"])
