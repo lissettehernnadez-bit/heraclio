@@ -60,9 +60,6 @@ if "historial" not in memoria:
 if "estado_ia" not in memoria:
     memoria["estado_ia"] = "normal"
 
-if "conocimientos" not in memoria:
-    memoria["conocimientos"] = {}
-
 if "aprendiendo" not in memoria:
     memoria["aprendiendo"] = None
 
@@ -398,20 +395,25 @@ def hablar_web():
 
         if palabra in palabras_basicas:
             continue
+        
+        resultado = supabase.table("conocimientos")\
+            .select("*")\
+            .eq("palabra", palabra)\
+            .execute()
 
-        # Si ya sabe la palabra
-        if palabra in memoria["conocimientos"]:
+        if resultado.data:
+
+            significado = resultado.data[0]["significado"]
 
             return jsonify({
-                "respuesta": f"Recuerdo que {palabra} es {memoria['conocimientos'][palabra]}",
+                "respuesta": f"Recuerdo que {palabra} es {significado}",
                 "emocion": "feliz"
             })
 
-        # Si no la sabe
-        if palabra not in memoria["conocimientos"]:
+        else:
 
             memoria["aprendiendo"] = palabra
-
+    
             with open("memoria.json", "w") as f:
                 json.dump(memoria, f)
 
