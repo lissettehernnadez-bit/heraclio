@@ -265,15 +265,17 @@ def enviar():
 def hablar_web():
 
     mensaje = request.json["texto"].lower()
-        
+
     if memoria["aprendiendo"] is not None:
 
         palabra = memoria["aprendiendo"]
 
-        memoria["conocimientos"][palabra] = mensaje
+        supabase.table("conocimientos").insert({
+            "palabra": palabra,
+            "significado": mensaje
+        }).execute()
 
-        print("APRENDIÓ:")
-        print(memoria["conocimientos"])
+        print(f"APRENDIÓ: {palabra} = {mensaje}")
 
         memoria["aprendiendo"] = None
 
