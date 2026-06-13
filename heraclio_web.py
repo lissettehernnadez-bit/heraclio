@@ -391,24 +391,28 @@ def hablar_web():
 ]
     palabras = mensaje.split()
 
+    conocimientos_encontrados = {}
+
     for palabra in palabras:
+
+        palabra = palabra.strip("¿?.,:;!¡")
 
         if palabra in palabras_basicas:
             continue
-        
+
+        if palabra == memoria.get("nombre_usuario", "").lower():
+            continue
+        if palabra == nombre_ia.lower():
+            continue
+
         resultado = supabase.table("conocimientos")\
             .select("*")\
             .eq("palabra", palabra)\
             .execute()
 
+
         if resultado.data:
-
-            significado = resultado.data[0]["significado"]
-
-            return jsonify({
-                "respuesta": f"Recuerdo que {palabra} es {significado}",
-                "emocion": "feliz"
-            })
+            conocimientos_encontrados[palabra] = resultado.data[0]["significado"]
 
         else:
 
@@ -421,7 +425,16 @@ def hablar_web():
                 "respuesta": f"¿Qué es {palabra}?",
                 "emocion": "confuso"
             })
+    if "qué es" in mensaje or "que es" in mensaje:
 
+        for palabra in palabras:
+
+            if palabra in conocimientos_encontrados:
+
+                return jsonify({
+                    "respuesta": f"Recuerdo que {palabra} es {conocimientos_encontrados[palabra]}",
+                    "emocion": "feliz"
+                })
     # SALUDO
     if "hola" in mensaje or "holis" in mensaje:
         respuesta = "¡Qué alegria verte otra vez!"
