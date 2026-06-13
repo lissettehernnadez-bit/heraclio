@@ -455,7 +455,7 @@ def hablar_web():
         respuesta = random.choice(respuestas)
         emocion = "feliz"
 
-    elif "cómo te llamas" in mensaje:
+    elif "cómo te llamas" in mensaje or "cuál es tu nombre" in mensaje:
         respuesta = nombre_ia
         emocion = "feliz"
 
@@ -519,7 +519,7 @@ def hablar_web():
             respuesta = "Todavía no me has dicho tu nombre."
             emocion = "triste"
 
-    elif "me llamo" in mensaje:
+    elif "me llamo" in mensaje or "mi nombre es" in mensaje:
 
         nombre_usuario = mensaje.replace("me llamo", "").strip()
 
