@@ -9,6 +9,8 @@ import asyncio
 import edge_tts
 import uuid
 
+from supabase import create_client
+
 app_web = Flask(__name__)
 CORS(app_web)
 
@@ -21,6 +23,21 @@ VOZ = "es-ES-AlvaroNeural"
 
     
 print("holis")
+
+SUPABASE_URL = "https://mrvifbyqjqlfsvzuhxub.supabase.co"
+SUPABASE_KEY = "sb_publishable_mf5Hgs7nlPX9C3rjx0A7Qg_zBrnjva7"
+
+supabase = create_client(
+    SUPABASE_URL,
+    SUPABASE_KEY
+)
+#probar conexion
+try:
+    resultado = supabase.table("conocimientos").select("*").execute()
+    print("SUPABASE FUNCIONA")
+except Exception as e:
+    print("ERROR SUPABASE:", e)
+
 
 # IDENTIDAD
 
@@ -380,6 +397,15 @@ def hablar_web():
         if palabra in palabras_basicas:
             continue
 
+        # Si ya sabe la palabra
+        if palabra in memoria["conocimientos"]:
+
+            return jsonify({
+                "respuesta": f"Recuerdo que {palabra} es {memoria['conocimientos'][palabra]}",
+                "emocion": "feliz"
+            })
+
+        # Si no la sabe
         if palabra not in memoria["conocimientos"]:
 
             memoria["aprendiendo"] = palabra
@@ -391,7 +417,6 @@ def hablar_web():
                 "respuesta": f"¿Qué es {palabra}?",
                 "emocion": "confuso"
             })
-
 
     # SALUDO
     if "hola" in mensaje or "holis" in mensaje:
@@ -533,7 +558,7 @@ def hablar_web():
         "emocion": emocion
     })
 
-@app_web.route("/hablar", methods=["POST"])
+@app_web.route("/voz", methods=["POST"])
 def hablar():
     texto = request.json["texto"]
 
