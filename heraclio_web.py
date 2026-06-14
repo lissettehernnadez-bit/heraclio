@@ -435,6 +435,21 @@ def hablar_web():
                     "respuesta": f"Recuerdo que {palabra} es {conocimientos_encontrados[palabra]}",
                     "emocion": "feliz"
                 })
+    if conocimientos_encontrados:
+
+        palabra = random.choice(
+            list(conocimientos_encontrados.keys())
+        )
+
+        significado = conocimientos_encontrados[palabra]
+
+        respuesta = f"Veo que mencionaste {palabra}. {significado}"
+
+        return jsonify({
+            "respuesta": respuesta,
+            "emocion": "normal"
+        })
+    
     # SALUDO
     if "hola" in mensaje or "holis" in mensaje:
         respuesta = "¡Qué alegria verte otra vez!"
