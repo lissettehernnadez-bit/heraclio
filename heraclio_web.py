@@ -354,6 +354,7 @@ def hablar_web():
     "donde", "dónde",
     "cuando", "cuándo",
     "porqué", "por qué",
+    "Cual", "cuales",
 
     # Verbos básicos
     "es", "son",
@@ -410,10 +411,12 @@ def hablar_web():
             .eq("palabra", palabra)\
             .execute()
 
-
         if resultado.data:
-            conocimientos_encontrados[palabra] = resultado.data[0]["significado"]
 
+            conocimientos_encontrados[palabra] = {
+                "significado": resultado.data[0]["significado"],
+                "tipo": resultado.data[0]["tipo"]
+            }
         else:
 
             memoria["aprendiendo"] = palabra
@@ -425,6 +428,7 @@ def hablar_web():
                 "respuesta": f"¿Qué es {palabra}?",
                 "emocion": "confuso"
             })
+        
     if "qué es" in mensaje or "que es" in mensaje:
 
         for palabra in palabras:
@@ -432,23 +436,24 @@ def hablar_web():
             if palabra in conocimientos_encontrados:
 
                 return jsonify({
-                    "respuesta": f"Recuerdo que {palabra} es {conocimientos_encontrados[palabra]}",
+                    "respuesta": f"Recuerdo que {palabra} es {conocimientos_encontrados[palabra]['significado']}",
                     "emocion": "feliz"
                 })
-    if conocimientos_encontrados:
+            
+        for palabra, datos in conocimientos_encontrados.items():
 
-        palabra = random.choice(
-            list(conocimientos_encontrados.keys())
-        )
+            if datos["tipo"] == "animal":
 
-        significado = conocimientos_encontrados[palabra]
+                respuestas = [
+                    f"¿Te gustan los {palabra}?",
+                    f"Siempre me ha dado curiosidad eso de los {palabra}.",
+                    f"¿Tienes algún {palabra}?"
+                ]
 
-        respuesta = f"Veo que mencionaste {palabra}. {significado}"
-
-        return jsonify({
-            "respuesta": respuesta,
-            "emocion": "normal"
-        })
+                return jsonify({
+                    "respuesta": random.choice(respuestas),
+                    "emocion": "feliz"
+                })
     
     # SALUDO
     if "hola" in mensaje or "holis" in mensaje:
